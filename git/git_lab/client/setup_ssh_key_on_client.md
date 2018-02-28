@@ -1,5 +1,7 @@
 # gitlab.rohs.ch - generate ssh key
 
+> git and putty with puttygen must be installed
+
 - Use puttygen to generate a private/public key pair
 - The public key
 	- Copy the public key
