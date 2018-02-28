@@ -1,0 +1,30 @@
+# Créer un fichier mysql-init
+
+# écrire dans le fichier la ligne : 
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'YourNewPassword';
+
+# modifier la configuration de MySQL
+
+nano /etc/mysql/my.cnf
+
+>	[mysqld]
+>	init_file=/path/to/mysql-init
+
+# ajouter le script et l'autorisation de lecture dans la config de apparmor :
+
+nano /etc/apparmor.d/usr.sbin.mysqld
+
+>	/path/to/mysql-init r,
+
+# redémarrer apparmor
+
+service apparmor restart
+
+# redémarrer MySQL
+
+service mysql restart
+
+# supprimer les lignes ajoutées dans MySQL et apparmor
+
+# supprimer le fichier mysql-init

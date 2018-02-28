@@ -1,0 +1,25 @@
+a#activer#activer le mod apache
+
+a2enmod headers
+
+# ajouter dans les deux oc.conf du virtualhost
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+</IfModule>
+
+# installer en root APCu || possibilité d'utiliser Redis à la place (remplacer en conséquences)
+# pour php 7 :
+apt install php-apcu
+# pour php 5 :
+apt-get install php5-apcu
+
+# ajouter dans owncloud/config/config.php 
+
+  'memcache.local' => '\OC\Memcache\APCu',
+  'memcache.locking' => '\OC\Memcache\APCu',
+  'cache_path' => '/var/www/sites/oc.xxx.ch/.cache',
+
+# s'assurer que l'utilisateur www-data puisse acceder à cache_path !!!
+  
+# changer dans les paramètres généraux d'administration OwnCloud le Cron de AJAX a Cron

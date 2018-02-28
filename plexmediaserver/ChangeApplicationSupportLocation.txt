@@ -1,0 +1,22 @@
+# stop service & kill tout les autres si il restent 
+service plexmediaserver stop && killall -u plex
+
+# copier dans le nouveau répertoire le dossier "Application Support"
+cp -rf '/var/lib/plexmediaserver/Library/Application Support' /home/plex/plexmediaserver/
+
+# Backup
+mv /var/lib/plexmediaserver /var/lib/plexmediaserver.OLD
+
+# recréer les fichiers
+mkdir /var/lib/plexmediaserver
+mkdir /var/lib/plexmediaserver/Library
+
+# créer le lien symbolique 
+ln -s '/home/plex/plexmediaserver' '/var/lib/plexmediaserver/Library/Application Support'
+
+# changer les droits
+chown -R plex:plex '/var/lib/plexmediaserver'
+chown -R plex:plex '/home/plex/plexmediaserver'
+
+# restart service
+service plexmediaserver start

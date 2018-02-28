@@ -1,0 +1,7 @@
+cd /home/seaFile/backup/backupxxxxxxxx/
+
+mysqldump -h localhost -u[username] -p[password] --opt seafile > databases/seafile.sql.`date +"%Y-%m-%d-%H-%M-%S"`
+
+cd /home
+
+rsync -avz --exclude="seaFile/backup" seaFile seaFile/backup/backup20170922/data/seafileData-`date +"%Y-%m-%d-%H-%M-%S"`

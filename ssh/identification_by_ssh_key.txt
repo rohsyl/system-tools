@@ -1,0 +1,4 @@
+générer un jeu de clé ssh (public private)
+
+placé la clé public dans ~/.ssh/authorized_keys sur le serveur
+

@@ -1,0 +1,34 @@
+# ajouter certbot au repo
+
+add-apt-repository ppa:certbot/certbot
+
+# /!\ Si ne focntionne pas, ajouter manuellement la ligne suivante dans le fichier /etc/apt/sources.list
+deb http://ftp.debian.org/debian jessie-backports main
+# et mettre a jour la liste des packages
+apt update
+
+# dl certbot
+apt install python-certbot-apache
+# /!\ si repo ajouté manuellement, installer certbot avec la commande suivante : (remplacer jessie par la bonne version de debian)
+sudo apt-get install python-certbot-apache -t jessie-backports
+
+
+# lancer certbot ( /!\ le port 443 TCP doit etre ouvert )
+
+certbot --apache
+
+# choisir le n° correspondant au site
+# entrez e-mail
+
+Agree
+No
+
+# choisir easy 1 ou secure 2 ( 1 = https + http / 2 = https only )
+
+
+# rediriger toutes les requetes http vers https : 
+# ajouter au Virtualhost :80 ->
+
+Redirect permanent / https://url.ltd/
+
+#

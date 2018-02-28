@@ -1,0 +1,10 @@
+https://sourceforge.net/p/webadmin/discussion/600155/thread/6eb89f60/
+
+
+sudo nano /usr/share/webmin/miniserv.pl
+
+environ ligne 4043 
+remplacer :
+	&write_data("Location: $prot://$host$portstr$in{'page'}\r\n");
+par :
+	&write_data("Location: https://$host$in{'page'}\r\n");

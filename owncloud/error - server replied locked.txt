@@ -1,0 +1,12 @@
+# When error :
+# Error downloading http://.../remote.php/webdav/.../file.ext - server replied: Locked (".../file.ext is locked) x,y MB
+
+# Enable maintaince mode
+cd /var/www/sites/oc.rohs.ch/public_html/
+sudo -u www-data php occ maintenance:mode --on
+
+# Deleted every entry in table "oc_file_locks" in database
+
+# Disable Maintaince mode
+sudo -u www-data php occ maintenance:mode --off
+

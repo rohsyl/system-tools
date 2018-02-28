@@ -1,0 +1,27 @@
+# Limiter un utilisateur ftp dans un le dossier de son virtualhost en utilisant vsftpd
+
+# Create user with 
+	useradd [user_name]
+# Create user's password with 
+	passwd [user_name]
+	# (You'll be prompted to specify the password).
+
+# Bind vhost diretory to the 'home' directory for this user with 
+	mount --bind /var/www/sites/www.domain.com /home/[user_name]
+
+# In /etc/vsftpd.conf, ensure all all of the following are set:-
+	chroot_local_user=YES
+	chroot_list_enable=YES
+	chroot_list_file=/etc/vsftpd.chroot_list
+# Only list users in the vsftpd.chroot_list file if you want them to have full access to anywhere on the server. 
+# By not listing them in this file, you're saying restrict all vsftpd users to their specified home directory.
+
+# OR In other words (for reference):-
+
+#means that by default, ALL users get chrooted except users in the file...
+	chroot_local_user=YES
+	chroot_list_enable=YES
+
+#means that by default, ONLY users in the file get chrooted...
+	chroot_local_user=NO
+	chroot_list_enable=YES

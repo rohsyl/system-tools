@@ -1,0 +1,25 @@
+#stopper sickrage 
+
+service sickrage stop
+
+#modifier le fichier 
+
+nano sickbeard/name_parser/parser.py
+
+#Environ a la ligne 148 changer la valeur de 4 au nombre voulu (max 9 stable)
+
+ if 'ep_num' in named_groups:
+                ep_num = self._convert_number(match.group('ep_num'))
+                if 'extra_ep_num' in named_groups and match.group('extra_ep_num'):
+                    tmp_episodes = range(ep_num, self._convert_number(match.group('extra_ep_num')) + 1)
+#cette ligne ---->  if len(tmp_episodes) > 9:
+                        continue
+                else:
+                    tmp_episodes = [ep_num]
+
+                result.episode_numbers = tmp_episodes
+                result.score += 3
+
+#relancer sickrage 
+
+service sickrage start

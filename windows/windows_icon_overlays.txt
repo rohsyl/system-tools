@@ -1,0 +1,9 @@
+Pourquoi les overlays d'icon des applications de type dropbox, owncloud, svn ne s'affiche plus ?
+  regedit
+  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers
+
+  Windows affiche seulement les 15 premiers overlays dans la liste se trouvant dans le registre (chemin vers cette liste ci dessus)
+  Windows prend les overlays dans l'ordre alphabetique
+  En ajoutant un espace (ou plusieurs) au debut du nom, ca permet de monter l'overlay dans la liste
+
+  A adapter selon les désirs... 

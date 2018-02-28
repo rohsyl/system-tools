@@ -1,0 +1,97 @@
+# https://www.digitalocean.com/community/tutorials/how-to-configure-vsftpd-to-use-ssl-tls-on-an-ubuntu-vps
+
+# VSFTPD
+
+# Install vsftpd
+# The vsftpd server is available in Ubuntu's default repositories. 
+# You can install it by typing:
+
+sudo apt-get install vsftpd
+# We now have vsftpd on our server, but we still must configure it.
+
+# Configure Basic vsftpd Functionality
+# The default configuration file is at /etc/vsftpd.conf. 
+# Open it with root privileges:
+
+sudo nano /etc/vsftpd.conf
+# Disable the ability for users to log in anonymously by finding the 
+# anonymous_enable parameter and changing it to read "NO":
+
+anonymous_enable=NO
+# Next, we need to enable user logins that use the local authentication files, 
+# since we disabled anonymous access. Uncomment this line:
+
+local_enable=YES
+# To enable users to make modifications to the filesystem, we will uncomment 
+# the write_enable parameter as well:
+
+write_enable=YES
+# Additionally, uncomment the chroot_local_user option to restrict users to 
+# their own home directories:
+
+chroot_local_user=YES
+# Save and close the file.
+
+# Create an FTP User
+# Because of the way vsftpd secures its chroot jails, the chroot must not be 
+# owned by the user and must not be writeable. Because of this, it is best 
+# to implement a user specifically for use with FTP.
+
+# Create the user like this:
+
+# sudo adduser ftpuser
+# Assign a password and feel free to press "ENTER" through the other prompts. 
+# Now, give root ownership of the ftpuser's home directory:
+
+sudo chown root:root /home/ftpuser
+# We need to create a separate directory within this home directory where files 
+# can be uploaded. Then, we need to give this directory over to our FTP user:
+
+sudo mkdir /home/ftpuser/files
+sudo chown ftpuser:ftpuser /home/ftpuser/files
+# Now, we should be able to log in (insecurely) as the ftpuser and upload files 
+# to the files directory.
+
+# Configure SSL with vsftpd
+# We need to create some SSL certificates to use with vsftpd. We can do this with 
+# the following command:
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
+# This will create a certificate that will last a year. It will be placed in the 
+# /etc/ssl/private/ directory, which we can reference in our configuration file.
+
+# Add the SSL Details to the vsftpd Configuration
+
+# Open the vsftpd configuration file again with root privileges:
+
+sudo nano /etc/vsftpd.conf
+# Towards the bottom of the file, you should find a line that matches the SSL 
+# certificate we just created:
+
+rsa_cert_file=/etc/ssl/private/vsftpd.pem
+# We will add the additional SSL info below this.
+
+# When we created the certificate, we included both the key file and the certificate 
+# in one file, so we can also point our private key line to that:
+
+rsa_private_key_file=/etc/ssl/private/vsftpd.pem
+# After that, we will add the following lines to force SSL. This will restrict clients 
+# that can't deal with TLS, but that is what we want.
+
+ssl_enable=YES
+allow_anon_ssl=NO
+force_local_data_ssl=YES
+force_local_logins_ssl=YES
+# After this we configure the server to use TLS, which is actually a successor to SSL, and preferred:
+
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+# Finally, we will require add some additional options to flesh out our configuration file:
+
+require_ssl_reuse=NO
+ssl_ciphers=HIGH
+# Save and close the file.
+
+# Now, we need to restart our server for our changes to take effect:
+sudo service vsftpd restart

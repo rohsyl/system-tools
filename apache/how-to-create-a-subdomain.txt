@@ -1,0 +1,27 @@
+﻿#Ajouter un enregistrement de type CNAME 
+#Host : subdomain.domain.tld
+#Dest : domain.tld
+
+#Créer un nouveau virtualhost en utilisant newvhost.sh
+./newvhost.sh subdomain.domain.tld
+
+#La racine de votre nouveau site se trouve sous /var/www/sites/subdomain.domain.tld/public_html
+#enjoy
+
+
+#Pour rediriger un port vers un subdomain, Installer le proxy pour apache2 si non disponible : 
+a2enmod proxy_http
+
+#ajouter ces lignes au /etc/apache2/site-available/subdomain.domain.tld
+
+        <Proxy *>
+                Order deny,allow
+                Allow from all
+        </Proxy>
+
+        ProxyRequests Off
+        ProxyPreserveHost On
+        ProxyPass / http://127.0.0.1:[PORT]/
+        ProxyPassReverse / http://127.0.0.1:[PORT]/
+
+#Si le site se trouve ailleurs avec un service (ex: PlexMediaServer), supprimer la ligne DocumentRoot
