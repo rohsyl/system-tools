@@ -16,3 +16,5 @@
 		Port 9122
 		IdentityFile ~/.ssh/gitlab
 		```
+	
+	> Warning : On Linux, the key permission must be set to 600
