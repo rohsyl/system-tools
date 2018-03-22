@@ -1,12 +1,11 @@
 # 1. Stop GitLab services
 ```
-$ gitlab-ctl stop
+$ sudo gitlab-ctl stop
 ```
 
 # 2. Disable built-in Nginx
 ```
-$ vi /etc/gitlab/gitlab.rb
-
+$ sudo nano /etc/gitlab/gitlab.rb
 
 # Uncomment the web server external_users settings, and set both to www-data.
 web_server['external_users'] = ['www-data']
@@ -24,54 +23,53 @@ $ gitlab-ctl reconfigure
 - Create a new virtual host files with `plex_script/apache/newvhost.sh` and set his content to
 ```
 <VirtualHost *:80>
-        ServerName gitlab.rohs.ch
-        ServerSignature Off
+    ServerName gitlab.rohs.ch
+    ServerSignature Off
 
-        DocumentRoot /opt/gitlab/embedded/service/gitlab-rails/public
+    DocumentRoot /opt/gitlab/embedded/service/gitlab-rails/public
 
-        ProxyRequests Off
-        ProxyPreserveHost On
-        AllowEncodedSlashes NoDecode
+    ProxyRequests Off
+    ProxyPreserveHost On
+    AllowEncodedSlashes NoDecode
 
-        ProxyPass / http://127.0.0.1:8080/
+    ProxyPass / http://127.0.0.1:8080/
 
-        ProxyPassReverse / http://127.0.0.1:8080/
+    ProxyPassReverse / http://127.0.0.1:8080/
 
-        <Directory /opt/gitlab/embedded/service/gitlab-rails/public>
-                    # apache 2.2
-                    Order allow,deny
-                    Allow from all
+    <Directory /opt/gitlab/embedded/service/gitlab-rails/public>
+        # apache 2.2
+        Order allow,deny
+        Allow from all
 
-                    # apache 2.4
-                    Require all granted
-        </Directory>
+        # apache 2.4
+        Require all granted
+    </Directory>
 
-        <Location />
-                Order deny,allow
-                Allow from all
+    <Location />
+        Order deny,allow
+        Allow from all
 
-                Require all granted
-        </Location>
+        Require all granted
+    </Location>
 
-        <Location /assets>
-                Require all granted
-                ProxyPass !
-                ProxyPassReverse !
-        </Location>
+    <Location /assets>
+        Require all granted
+        ProxyPass !
+        ProxyPassReverse !
+    </Location>
 
-        RewriteEngine on
-        RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
-        RewriteRule .* http://127.0.0.1:8080%{REQUEST_URI} [P,QSA]
-
+    RewriteEngine on
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+    RewriteRule .* http://127.0.0.1:8080%{REQUEST_URI} [P,QSA]
 </VirtualHost>
-
 ```
+
 - Reload apache2
 ```
-$ service apache2 restart
+$ sudo systemctl restart apache2
 ```
 
 # 5. Start GitLab services
 ```
-$ gitlab-ctl start
+$ sudo gitlab-ctl start
 ```
