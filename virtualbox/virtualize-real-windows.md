@@ -1,5 +1,7 @@
 # How to virtualize a real Windows installation
 
+**IT DOES'NT WORK FINALLY, LOL...**
+
 > This tutorial will show you how to start a real windows installation (installed on real drive) into Virtualbox from a Linux system.
 
 ## Prerequisites
