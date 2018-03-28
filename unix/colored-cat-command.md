@@ -2,13 +2,13 @@
 
 > Install Pygments and Highlight
 
-- Use `apt install` command to install or update them
+    - Use `apt install` command to install or update them
 	```
 	sudo apt install python-pygments highlight
 	```
 > create both aliases
 
-- Here aliases are `catp` for Pygmentize and `cath` for highlight
+    - Here aliases are `catp` for Pygmentize and `cath` for highlight
 	```alias catp='pygmentize -g'```
 
 	```alias cath='highlight -O ansi —force'```
