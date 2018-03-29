@@ -11,12 +11,13 @@
 	- Export key to `~/.ssh/gitlab` ([~] is the current user home)
 -The config file
 	- Create a new file called `~/.ssh/config`
-		```
-		Host gitlab.yourserver.tld
-		User git
-		Port >your ssh port<
-		IdentityFile ~/.ssh/gitlab.privateKey
-		```
+	
+    ```
+    Host gitlab.yourserver.tld
+    User git
+    Port >your ssh port<
+    IdentityFile ~/.ssh/gitlab.privateKey
+    ```
 	
 	> Warning : On Linux, the key permission must be set to 600
 
@@ -28,9 +29,10 @@
 	- Copy the private key in `~/.ssh/gitlab.privateKey`
 - The config file
 	- Open the `~/.ssh/config` file and add 
-		```
-		Host localhost
-		User git
-		Port >your ssh port<
-		IdentityFile ~/.ssh/gitlab.privateKey
-		```
+	 
+    ```
+    Host localhost
+    User git
+    Port >your ssh port<
+    IdentityFile ~/.ssh/gitlab.privateKey
+    ```
