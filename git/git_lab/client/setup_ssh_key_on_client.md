@@ -5,7 +5,7 @@
 - Use puttygen to generate a private/public key pair
 - The public key
 	- Copy the public key
-	- On gitlab.publicKey -> Profil -> Settings -> SSH Keys -> Add an SSH Key and paste the key in the Key field
+	- On gitlab webpage -> Profil -> Settings -> SSH Keys -> Add an SSH Key and paste the key in the Key field
 - The private key
 	- On puttygen, click on Conversions -> Export openssh key for Linux and putty key for Windows
 	- Export key to `~/.ssh/gitlab` ([~] is the current user home)
