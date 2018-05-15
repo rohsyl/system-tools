@@ -25,3 +25,7 @@
 #means that by default, ONLY users in the file get chrooted...
 	chroot_local_user=NO
 	chroot_list_enable=YES
+	
+	
+	
+	

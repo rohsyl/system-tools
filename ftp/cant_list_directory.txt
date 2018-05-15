@@ -1,0 +1,9 @@
+when error :
+Error: Failed to retrieve directory listing
+
+set in /etc/vsftpd.cong
+	pasv_enable=Yes
+	pasv_max_port=10100
+	pasv_min_port=10090
+	
+!!! dont forget to set the port forwarding for these ports

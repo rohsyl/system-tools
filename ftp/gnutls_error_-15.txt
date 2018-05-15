@@ -1,0 +1,6 @@
+When error : 
+	"GnuTLS error -15: An unexpected TLS packet was received."
+Set in /etc/vsftp.conf
+	allow_writeable_chroot=YES
+
+
