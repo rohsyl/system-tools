@@ -22,6 +22,7 @@ www=/var/www/sites
 sn=$1
 
 # Create the file with VirtualHost configuration in /etc/apache2/site-available/
+echo Create apache config file under /etc/apache2/sites-available/$sn.conf
 echo "<VirtualHost *:80>
     ServerAdmin webmaster@$sn
 	ServerName $sn
@@ -38,15 +39,24 @@ echo "<VirtualHost *:80>
 </VirtualHost>" > /etc/apache2/sites-available/$sn.conf
 
 #Create diretory
+echo Create directories $www/$sn
 mkdir $www/$sn
 mkdir $www/$sn/public_html
 mkdir $www/$sn/logs
 
 # Enable the site
-a2ensite $sn
+echo Configure the new virtual host
+a2ensite $sn > /dev/null 2>&1
 
 
 # Reload Apache2
-service apache2 reload
+echo Restart apache
+service apache2 reload > /dev/null 2>&1
 
-echo "Your new site is available $sn"
+# Set permissions
+echo Fix permissions
+chown -R www-data:www-data $www/$sn
+chmod -R g+rwx $www/$sn
+
+
+echo Your new site is available $sn
