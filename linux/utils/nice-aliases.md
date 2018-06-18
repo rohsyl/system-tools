@@ -34,7 +34,11 @@ alias
 
 ### Improved ls -la
 ```
+# short version
 alias ll="ls --color -lAGbh --time-style='+%d %b %Y %H:%M'"
+
+# extended version
+alias ll="ls --color -lbh --time-style='+%d %b %Y %H:%M'"
 ```
 
 ### Colour your cat command output - the easy way
