@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# This script update plexmediaserver from the url given in parameter
+# you should put it under /usr/local/bin/
+# and run it with sudo newvhost
+
+if [ $# -eq 0 ] 
+then
+	echo "No arguments supplied"
+	echo "Type \"$0 --help\" for more informations"
+	exit 0
+fi
+
+if [ $1 = "--help" ]
+then
+	echo "$0 [ URL_PLEX_DEB_FILE  ]"
+	echo "Update plex from the given URL that point to a .deb file URL_PLEX_DEB_FILE, run as SUDO"
+	exit 0
+fi
+
+url=$1
+filename="plex.deb"
+
+
+echo Clear old temp file
+rm $filename 2> /dev/null
+echo [OK]
+
+
+# Create the file with VirtualHost configuration in /etc/apache2/site-available/
+echo Download $1 [OK]
+wget -O $filename $1
+echo [OK]
+
+echo Install package
+dpkg -i $filename
+echo [OK]
+
+echo Plex updated !
+echo [OK]
