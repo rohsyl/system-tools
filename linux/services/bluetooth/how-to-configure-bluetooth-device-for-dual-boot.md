@@ -27,9 +27,14 @@ mount /dev/sda1 /media/rohs/SYSTEM
 > This will generate a directory called `bluetooth` in your current directory.
 
 9. Replace the Linux pairing key by the ones exported by the script `export-ble-infos.py`
-    - A directory "bluetooth" is generated in your current location
-    - Open the file ./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy/info
-    - Open in parallel the file located in /var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy/info
+    - Open the file `./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy/info`
+        ```
+        nano ./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy/info
+        ```
+    - Open in a second terminal the file located in `/var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy/info`
+        ```
+        nano /var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy/info
+        ```
     - Copy the following value from the generated info file to the second one
         ```
         [IdentityResolvingKey]
@@ -46,10 +51,10 @@ mount /dev/sda1 /media/rohs/SYSTEM
         Rand=
         ```
     - Close and save the files
-    - Rename the folder /var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy with the same name of the generated one ./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy
+    - Rename the directory `/var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy` with the same name of the generated one `./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy`
     - Restart the bluetooth service
         ```
         sudo service bluetooth force-reaload
         ```
         
-> PS : xx:xx:xx:xx:xx is the MAC address of your bluetooth card. yy:yy:yy:yy:yy is the MAC of the mouse in the generated directory. yy:yz:yy:yy:yy is the MAC of the mouse in your /var/lib/bluetooth
+> PS : `xx:xx:xx:xx:xx` is the MAC address of your bluetooth card. `yy:yy:yy:yy:yy` is the MAC of the mouse in the generated directory. `yy:yz:yy:yy:yy` is the MAC of the mouse in your /var/lib/bluetooth
