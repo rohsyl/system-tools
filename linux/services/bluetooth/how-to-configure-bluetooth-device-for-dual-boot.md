@@ -9,6 +9,11 @@ This tutorial will explain you how to pair the Microsoft Designer Mouse with you
 3. Boot into Windows
 4. Pair the mouse
 5. Boot back into Linux again
+6. Install a registry editor
+```
+apt-get install chntpw
+```
+
 6. Mount your Windows Partition
 
 ```
