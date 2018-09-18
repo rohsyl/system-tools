@@ -14,21 +14,42 @@ This tutorial will explain you how to pair the Microsoft Designer Mouse with you
 apt-get install chntpw
 ```
 
-6. Mount your Windows Partition
-
+7. Mount your Windows Partition
 ```
 mount /dev/sda1 /media/rohs/SYSTEM
 ```
-
 > Replace sda1 by your Windows partition
 
-7. Run the script `export-ble-infos.py`
-
+8. Run the script `export-ble-infos.py`
 ```
 ./export-ble-infos.py -s /media/rohs/SYSTEM/Windows/System32/config/SYSTEM
 ```
+> This will generate a directory called `bluetooth` in your current directory.
 
-This will generate a directory called `bluetooth` in your current directory.
-
-8. Replace the Linux pairing key by the ones exported by the script `export-ble-infos.py`
-
+9. Replace the Linux pairing key by the ones exported by the script `export-ble-infos.py`
+    - A directory "bluetooth" is generated in your current location
+    - Open the file ./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy/info
+    - Open in parallel the file located in /var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy/info
+    - Copy the following value from the generated info file to the second one
+        ```
+        [IdentityResolvingKey]
+        Key=
+        
+        [LocalSignatureKey]
+        Key=
+        
+        [LongTermKey]
+        Key=
+        
+        [LongTermKey]
+        EDiv=
+        Rand=
+        ```
+    - Close and save the files
+    - Rename the folder /var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy with the same name of the generated one ./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy
+    - Restart the bluetooth service
+        ```
+        sudo service bluetooth force-reaload
+        ```
+        
+> PS : xx:xx:xx:xx:xx is the MAC address of your bluetooth card. yy:yy:yy:yy:yy is the MAC of the mouse in the generated directory. yy:yz:yy:yy:yy is the MAC of the mouse in your /var/lib/bluetooth
