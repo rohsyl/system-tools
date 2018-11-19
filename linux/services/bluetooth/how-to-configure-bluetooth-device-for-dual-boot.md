@@ -47,6 +47,7 @@ mount /dev/sda1 /media/rohs/SYSTEM
         Key=
         
         [LongTermKey]
+        Key=
         EDiv=
         Rand=
         ```
