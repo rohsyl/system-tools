@@ -35,6 +35,7 @@ echo "<VirtualHost *:80>
 		AllowOverride All
 		Order allow,deny
 		allow from all
+		Require all granted
 	</Directory>
 </VirtualHost>" > /etc/apache2/sites-available/$sn.conf
 
