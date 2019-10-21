@@ -50,6 +50,12 @@ mount /dev/sda1 /media/rohs/SYSTEM
         Key=
         EDiv=
         Rand=
+        
+        [ConnectionParameters]
+        MinInterval=12
+        MaxInterval=12
+        Latency=30
+        Timeout=300
         ```
     - Close and save the files
     - Rename the directory `/var/lib/bluetooth/xx:xx:xx:xx:xx/yy:yz:yy:yy:yy` with the same name of the generated one `./bluetooth/xx:xx:xx:xx:xx/yy:yy:yy:yy:yy`
