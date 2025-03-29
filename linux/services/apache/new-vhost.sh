@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # newvhost: Create virtual hosts in Apache2 quickly and safely
-# Place it under /usr/local/bin/ and run with sudo newvhost
 
 APACHE_SITES_AVAILABLE="/etc/apache2/sites-available"
 WWW="/var/www/sites"
